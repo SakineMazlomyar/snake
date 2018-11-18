@@ -1,6 +1,8 @@
 .div{
     display: inline;
+    position: relative;
 }
 .img{
     width: 1em;
+    position: relative;
 }
