@@ -5,6 +5,8 @@ var toRightMovment;
 
 function init(){
    createSnakeForm()
+   directions()
+  
 }
 function createSnakeForm(){
     div = document.createElement("div");
@@ -19,33 +21,42 @@ function createSnakeForm(){
     document.body.appendChild(div)
 
     //Move the pictures
- 
     toRightMovment = setInterval(moveToRight, 300)
 
 }
 function directions(){
-    var button = document.createElement("button");
-    button.innerText = "arrow right"
-    button.onkeydown = function(key){
-        key = key || window.event;
-        if(e.onkeydown == "37"){
-            div.style.transform = "scaleX(1)";
-        }else if(e.onkeydown == "39"){
-            div.style.transform = "scaleX(-1)";
+ 
+    document.onkeydown = function(key){
+        if (key.keyCode == '38') {
+            div.style.transform = "scaleY(1)"
+            // up arrow
         }
-    }
+        else if (key.keyCode == '40') {
+            div.style.transform = "scaleX(-1)"
+            // down arrow
+        }
+        else if (key.keyCode == '37') {
+            div.style.transform = "scaleX(-1)"
+            toLeftMovment = setInterval(moveToLeft, 300)
+           // left arrow
+        }
+        else if (key.keyCode == '39') {
+            div.style.transform = "scaleX(1)"
+            setInterval(moveToRight, 300)
+           // right arrow
+        }
+    }  
 }
 
 function moveToRight(){
     if (pos == 350) {
         alert("Failed ;(")
         clearInterval(toRightMovment);
-        toLeftMovment = setInterval(moveToLeft, 300)
     } else {
         pos+=5; 
         var speed = 0.5
-        div.style.left = pos * 0.5 + 'px' ; 
-        directions()
+        div.style.left = pos * speed + 'px' ; 
+        
         
     }
 }
@@ -56,8 +67,8 @@ function moveToLeft(){
     } else {
         pos-=5; 
         var speed = 0.5
-        div.style.right = pos * 0.5 + 'px' ; 
-        directions()
+        div.style.right = pos * speed + 'px' ; 
+      
         
     }
 }
