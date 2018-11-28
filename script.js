@@ -14,7 +14,7 @@ function init(){
 function createSnakeForm(){
     div = document.createElement("div");
     div.classList.add("div")
-    //create the pictures
+    //create every single square of snake
     for(var i = 0; i<5; i++){
         picture = document.createElement("img");
         picture.classList.add("img")
@@ -23,13 +23,10 @@ function createSnakeForm(){
     }
     document.body.appendChild(div)
 
-    //Move the snake to right
+    //create initial movment
     toRightMovment = setInterval(goToRight, 300)
-    //increarment the speed not one
-    
-    
-
 }
+
 function directions(){
  
     document.onkeydown = function(key){
@@ -58,8 +55,7 @@ function directions(){
 
 function goToRight(){
     speed.x += ((Math.random()*1/100));
-    console.log(speed.x)
-    console.log(speed.x)
+
     if (pos.x > 50) {
         alert("Failed ;(")
         clearInterval(toRightMovment);
