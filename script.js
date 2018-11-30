@@ -70,7 +70,8 @@ function goToRight(){
     }
 }
 function gotToLeft(){
-    if (pos.x < 0) {
+    speed.x += ((Math.random()*1/1000));
+    if (pos.x < -1) {
         console.log("Failed ;(")
         clearInterval(toLefttMovment);
     } else {
@@ -81,7 +82,8 @@ function gotToLeft(){
     }
 }
 function goToDown(){
-    speed.x += ((Math.random()*1/1000));
+    div.style.display = "block"
+    speed.y+= ((Math.random()*1/1000));
     if (pos.y >100) {
         console.log("Failed ;(")
         clearInterval(toDownMovment);
@@ -89,7 +91,7 @@ function goToDown(){
     
         div.style.left = pos.x + '%' ; 
         pos.y+=speed.x 
-        div.style.bottom = pos.y + '%' ; 
+        div.style.top= pos.y + '%' ; 
       
         
     }
