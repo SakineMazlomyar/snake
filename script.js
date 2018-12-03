@@ -10,9 +10,8 @@ var toDownMovment;
 function init(){
    createSnakeForm()
    directions()
- 
-  
 }
+
 function createSnakeForm(){
     div = document.createElement("div");
     div.classList.add("div")
@@ -24,13 +23,11 @@ function createSnakeForm(){
         div.appendChild(picture);
     }
     document.body.appendChild(div)
-
     //create initial movment
     toRightMovment = setInterval(goToRight, 50)
 }
 
 function directions(){
- 
     document.onkeydown = function(key){
         if (key.keyCode == '38') {
             div.style.transform = "scaleY(1)"
@@ -80,11 +77,10 @@ function goToRight(){
         clearInterval(toRightMovment);
     } else {
         pos.x+=speed.x
-        div.style.left= pos.x + '%' ; 
-        
- 
+        div.style.left= pos.x + '%' ;   
     }
 }
+
 function gotToLeft(){
     speed.x += ((Math.random()*1/1000));
     if (pos.x < -1) {
@@ -92,25 +88,22 @@ function gotToLeft(){
         clearInterval(toLefttMovment);
     } else {
         pos.x-=speed.x; 
-        div.style.left= pos.x + '%' ; 
-      
-        
+        div.style.left= pos.x + '%' ;    
     }
 }
+
 function goToDown(){
     speed.y+= ((Math.random()*1/1000));
     if (pos.y >90) {
         console.log("Failed ;(")
         clearInterval(toDownMovment);
     } else {
-    
         div.style.left = pos.x + '%' ; 
         pos.y+=speed.y 
-        div.style.top= pos.y + '%' ; 
-      
-        
+        div.style.top= pos.y + '%' ;    
     }
 }
+
 function goToUp(){
     speed.y+= ((Math.random()*1/1000));
     if (pos.y < 0) {
@@ -118,8 +111,6 @@ function goToUp(){
         clearInterval(toUpMovment);
     } else {
         pos.y-=speed.y; 
-        div.style.top= pos.y + '%' ; 
-      
-        
+        div.style.top= pos.y + '%' ;    
     }
 }
