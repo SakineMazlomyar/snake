@@ -34,23 +34,39 @@ function directions(){
     document.onkeydown = function(key){
         if (key.keyCode == '38') {
             div.style.transform = "scaleY(1)"
+            clearInterval(toDownMovment);
+            clearInterval(toRightMovment);
+            clearInterval(toLefttMovment);
+
+            div.style.flexDirection = "column"
+            toUpMovment = setInterval(goToUp, 30)
             // up arrow
         }
         else if (key.keyCode == '40') {
             //div.style.transform = "scaleY(-1)"
             clearInterval(toRightMovment);
+            clearInterval(toLefttMovment);
+            clearInterval(toUpMovment);
+
+            div.style.flexDirection = "column"
             toDownMovment = setInterval(goToDown, 30)
             // down arrow
         }
         else if (key.keyCode == '37') {
             div.style.transform = "scaleX(-1)"
             clearInterval(toRightMovment);
+            clearInterval(toDownMovment);
+            clearInterval(toUpMovment);
+            div.style.flexDirection = "row"
             toLefttMovment = setInterval(gotToLeft, 30)
            // left arrow
         }
         else if (key.keyCode == '39') {
             div.style.transform = "scaleX(1)"
             clearInterval(toLefttMovment);
+            clearInterval(toDownMovment);
+            clearInterval(toUpMovment);
+            div.style.flexDirection = "row"
             toRightMovment = setInterval(goToRight, 30)
            // right arrow
         }
@@ -82,28 +98,28 @@ function gotToLeft(){
     }
 }
 function goToDown(){
-    div.style.display = "block"
     speed.y+= ((Math.random()*1/1000));
-    if (pos.y >100) {
+    if (pos.y >90) {
         console.log("Failed ;(")
         clearInterval(toDownMovment);
     } else {
     
         div.style.left = pos.x + '%' ; 
-        pos.y+=speed.x 
+        pos.y+=speed.y 
         div.style.top= pos.y + '%' ; 
       
         
     }
 }
-/* function goToUp(){
+function goToUp(){
+    speed.y+= ((Math.random()*1/1000));
     if (pos.y < 0) {
         console.log("Failed ;(")
         clearInterval(toUpMovment);
     } else {
-        pos.y+=speed.x; 
-        div.style.bottom= pos.y + '%' ; 
+        pos.y-=speed.y; 
+        div.style.top= pos.y + '%' ; 
       
         
     }
-} */
+}
