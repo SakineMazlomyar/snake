@@ -6,11 +6,17 @@ var toRightMovment;
 var toLefttMovment;
 var toUpMovment; 
 var toDownMovment;
+var myCanvas;
+var context;
+var width = 20;
+var height = 20;
+var foodPos = {x:0 , y: 0}
 
 function init(){
    createSnakeForm()
    directions()
    createFood()
+   eatFood()
 }
 
 function createSnakeForm(){
@@ -117,9 +123,22 @@ function goToUp(){
 }
 
 function createFood(){
-    var myCanvas = document.querySelector("canvas#myCanvas");
-    var context = myCanvas.getContext("2d");
+    myCanvas = document.querySelector("canvas#myCanvas");
+    myCanvas.classList.add("foodPosition");
+    foodPos.x+= Math.floor((Math.random()*200));
+    foodPos.y+= Math.floor((Math.random()*200));
+   
+    context = myCanvas.getContext("2d");
     context.fillStyle =  "#FF0000";
-    context.fillRect(0,0,150,75);
+    context.fillRect(foodPos.x,foodPos.y,width,height);
 
+    
+}
+
+function eatFood(){
+    myCanvas = document.querySelector("canvas#myCanvas");
+    if(pos.x == foodPos.x){
+        context.clearRect(foodPos.x, foodPos.y, width, height)
+        createFood()
+    }
 }
