@@ -10,6 +10,7 @@ var toDownMovment;
 function init(){
    createSnakeForm()
    directions()
+   createFood()
 }
 
 function createSnakeForm(){
@@ -113,4 +114,12 @@ function goToUp(){
         pos.y-=speed.y; 
         div.style.top= pos.y + '%' ;    
     }
+}
+
+function createFood(){
+    var myCanvas = document.querySelector("canvas#myCanvas");
+    var context = myCanvas.getContext("2d");
+    context.fillStyle =  "#FF0000";
+    context.fillRect(0,0,150,75);
+
 }
