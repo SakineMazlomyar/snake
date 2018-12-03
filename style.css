@@ -1,5 +1,6 @@
 .div{
-    display: inline;
+    display: flex;
+    height: 1em;
     position: fixed;
 }
 .img{
@@ -7,6 +8,3 @@
     position: relative;
 }
 
-.displayBlock{
-    display: block;
-}
