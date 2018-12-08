@@ -34,92 +34,35 @@ function createSnakeForm(){
     toRightMovment = setInterval(goToRight, 50)
 }
 
-function directions(){
-    document.onkeydown = function(key){
-        if (key.keyCode == '38') {
-            div.style.transform = "scaleY(1)"
-            clearInterval(toDownMovment);
-            clearInterval(toRightMovment);
-            clearInterval(toLefttMovment);
-
-            div.style.flexDirection = "column"
-            toUpMovment = setInterval(goToUp, 30)
-            // up arrow
-        }
-        else if (key.keyCode == '40') {
-            //div.style.transform = "scaleY(-1)"
-            clearInterval(toRightMovment);
-            clearInterval(toLefttMovment);
-            clearInterval(toUpMovment);
-
-            div.style.flexDirection = "column"
-            toDownMovment = setInterval(goToDown, 30)
-            // down arrow
-        }
-        else if (key.keyCode == '37') {
-            div.style.transform = "scaleX(-1)"
-            clearInterval(toRightMovment);
-            clearInterval(toDownMovment);
-            clearInterval(toUpMovment);
-            div.style.flexDirection = "row"
-            toLefttMovment = setInterval(gotToLeft, 30)
-           // left arrow
-        }
-        else if (key.keyCode == '39') {
-            div.style.transform = "scaleX(1)"
-            clearInterval(toLefttMovment);
-            clearInterval(toDownMovment);
-            clearInterval(toUpMovment);
-            div.style.flexDirection = "row"
-            toRightMovment = setInterval(goToRight, 30)
-           // right arrow
-        }
-    }  
-}
 
 function goToRight(){
-    speed.x += ((Math.random()*1/1000));
-    if (pos.x > 89) {
-        console.log("Failed ;(")
-        clearInterval(toRightMovment);
-    } else {
-        pos.x+=speed.x
-        div.style.left= pos.x + '%' ;   
-    }
+    speed.x += ((Math.random()*1/1000));  
+    pos.x+=speed.x
+    div.style.left= pos.x + '%' ;  
+     
 }
+
 
 function gotToLeft(){
     speed.x += ((Math.random()*1/1000));
-    if (pos.x < -1) {
-        console.log("Failed ;(")
-        clearInterval(toLefttMovment);
-    } else {
-        pos.x-=speed.x; 
-        div.style.left= pos.x + '%' ;    
-    }
+    pos.x-=speed.x; 
+    div.style.left= pos.x + '%' ;   
+     
+    
 }
 
 function goToDown(){
     speed.y+= ((Math.random()*1/1000));
-    if (pos.y >90) {
-        console.log("Failed ;(")
-        clearInterval(toDownMovment);
-    } else {
-        div.style.left = pos.x + '%' ; 
-        pos.y+=speed.y 
-        div.style.top= pos.y + '%' ;    
-    }
+    pos.y+=speed.y 
+    div.style.top= pos.y + '%' ;  
+      
 }
 
 function goToUp(){
     speed.y+= ((Math.random()*1/1000));
-    if (pos.y < 0) {
-        console.log("Failed ;(")
-        clearInterval(toUpMovment);
-    } else {
-        pos.y-=speed.y; 
-        div.style.top= pos.y + '%' ;    
-    }
+    pos.y-=speed.y; 
+    div.style.top= pos.y + '%' ;    
+    
 }
 
 function createFood(){
@@ -136,9 +79,63 @@ function createFood(){
 }
 
 function eatFood(){
-    myCanvas = document.querySelector("canvas#myCanvas");
-    if(pos.x == foodPos.x){
-        context.clearRect(foodPos.x, foodPos.y, width, height)
-        createFood()
-    }
+ 
+
+}
+function directions(){
+    document.onkeydown = function(key){
+        if (key.keyCode == '38') {
+            div.style.transform = "scaleY(1)"
+            clearInterval(toDownMovment);
+            clearInterval(toRightMovment);
+            clearInterval(toLefttMovment);
+
+            div.style.flexDirection = "column"
+            toUpMovment = setInterval(goToUp, 30)
+            if (pos.y < 0) {
+                clearInterval(toUpMovment);
+            }
+            // up arrow
+        }
+        else if (key.keyCode == '40') {
+            div.style.transform = "scaleY(-1)"
+            clearInterval(toRightMovment);
+            clearInterval(toLefttMovment);
+            clearInterval(toUpMovment);
+
+            div.style.flexDirection = "column"
+            toDownMovment = setInterval(goToDown, 30)
+            if (pos.y >90) {
+                clearInterval(toDownMovment);
+            }
+            // down arrow
+        }
+        else if (key.keyCode == '37') {
+            div.style.transform = "scaleX(-1)";             
+            clearInterval(toRightMovment);
+            clearInterval(toDownMovment);
+            clearInterval(toUpMovment);
+            div.style.flexDirection = "row"
+            toLefttMovment = setInterval(gotToLeft, 30)
+            (function s(){
+                if (div.style.left < -1) {
+                    clearInterval(toLefttMovment);
+                    console.log(div.style.left)
+                }
+            })();
+           // left arrow
+        }
+        else if (key.keyCode == '39') {
+            div.style.transform = "scaleX(1)"
+            clearInterval(toLefttMovment);
+            clearInterval(toDownMovment);
+            clearInterval(toUpMovment);
+            div.style.flexDirection = "row"
+            toRightMovment = setInterval(goToRight, 30)
+            if (pos.x > 89) {
+                clearInterval(toRightMovment);
+            }
+           // right arrow
+        }
+    }  
 }
