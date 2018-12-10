@@ -36,50 +36,40 @@ function draw(){
         }
         else if (key.keyCode == '37') {
             xspeed = -1
-            console.log(xspeed)
            // left arrow
         }
         else if (key.keyCode == '39') {
             xspeed = 1
-            console.log(xspeed)
+          
            // right arrow
         }
     }  
 })();
 var foodPos = {x: 0, y: 0};
-var ss = setInterval(createFood, 4000)
+var ss = setInterval(createFood, 4000);
 function createFood(){
     var myCanvas = document.querySelector("canvas#myCanvas");
     var context = myCanvas.getContext("2d");
     context.clearRect(foodPos.x, foodPos.y, 10, 10); 
-    foodPos.x += Math.floor((Math.random()*100));
-    foodPos.y += Math.floor((Math.random()*100));
+    foodPos.x += Math.floor((Math.random()*200));
+    foodPos.y += Math.floor((Math.random()*200));
    
     context.fillStyle =  "red";
     context.fillRect(foodPos.x,foodPos.y, 10, 10);
-    console.log(foodPos.x)
-    console.log(foodPos.y)
-
-    if(foodPos.x >590 || foodPos.x < 0){
-        clearInterval(ss);
-        ss = setInterval(createFood, 4000);
-    }
-    if(foodPos.y >590 || foodPos.y < 0){
-        clearInterval(ss);
-        ss = setInterval(createFood, 4000);
-    }
+    console.log(foodPos.x, foodPos.y)
     
-}
-(function s(){
     if(foodPos.x >590 || foodPos.x < 0){
-        clearInterval(ss);
-        ss = setInterval(createFood, 4000);
+        foodPos.x = 0
+    
     }
     if(foodPos.y >590 || foodPos.y < 0){
-        clearInterval(ss);
-        ss = setInterval(createFood, 4000);
+        foodPos.y = 0
     }
-})();
+}
+
+
+
+
 
 
 
