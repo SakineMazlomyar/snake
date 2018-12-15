@@ -58,7 +58,8 @@ function draw(){
         }
     }  
 })();
-var foodPos = {x: 10, y: 10};
+var foodPos = {x: 10, y: 10, foodWidth: 10, foodHeight: 10};
+
 var foodInterval = setInterval(createFood, 4000);
 function createFood(){
     var myCanvas = document.querySelector("canvas#myCanvas");
@@ -69,7 +70,7 @@ function createFood(){
    
 
     context.fillStyle =  "red";
-    context.fillRect(foodPos.x,foodPos.y, 10, 10);
+    context.fillRect(foodPos.x,foodPos.y, foodPos.foodWidth, foodPos.foodHeight);
 
     
     if(foodPos.x >590 || foodPos.x < 0){
@@ -82,19 +83,15 @@ function createFood(){
     eatFood(x, y, foodPos.x, foodPos.y)
 }
 
-var i = 0;
+var i = 10;
 function eatFood(xSnake, ySnake, xFood,yFood ){
 
-    if(xSnake == xFood){
-        width +=10
+    if(xSnake+ width == xFood + foodPos.foodWidth && ySnake+ heigt == yFood + foodPos.foodHeight){
+        width +=i
         heigt = 10;
         context.fillRect(x, y, width, heigt);
     }
-    if(ySnake == yFood){
-        heigt +=10
-        width = 10;
-        context.fillRect(x, y, width, heigt);
-    }
+ 
 
 }
 
