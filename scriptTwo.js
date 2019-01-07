@@ -1,37 +1,42 @@
 
 var snakeInterval = setInterval(draw, 30);
-var x = 1;
-var y = 0;
 var xspeed = 1;
 var yspeed = 0;
 var width = 10;
 var heigt = 10;
 var context
+snakeCordinate = [
+    {x:150, y: 150},
+    {x:140, y: 150},
+    {x:130, y: 150},
+    {x:120, y: 150}
+]
 function draw(){
     var myCanvas = document.querySelector("canvas#myCanvas");
     context = myCanvas.getContext("2d");
-    context.clearRect(x, y, innerWidth, innerHeight); 
+    context.clearRect(snakeCordinate.x, snakeCordinate.y, innerWidth, innerHeight); 
     context.fillStyle = "green";
     
-    x += xspeed
-    y += yspeed
+    snakeCordinate.x += xspeed
+    snakeCordinate.y += yspeed
+    console.log(snakeCordinate.x, )
 
-    context.fillRect(x, y, width, heigt);
+    context.fillRect(snakeCordinate.x, snakeCordinate.y, width, heigt);
 
-    if(x + width >590 || x < 0){
+    //eatFood(x, y, foodPos.x, foodPos.y, context)
+    if(snakeCordinate.x + width >590 || snakeCordinate.x < 0){
         clearInterval(snakeInterval)
         clearInterval(foodInterval)
     }
-    if(y + heigt >590 || y < 0){
+    if(snakeCordinate.y + heigt >590 ||  snakeCordinate.y < 0){
         clearInterval(snakeInterval)
         clearInterval(foodInterval)
     }
-    eatFood(x, y, foodPos.x, foodPos.y, context)
-
+   /*  checkLocation(snakeCordinate.x, width, heigt, snakeCordinate.y, foodPos.x, foodPos.y) */
 }
 
 //check the directions
-(function directions(){
+/* (function directions(){
     document.onkeydown = function(key){
         if (key.keyCode == '38') {
             yspeed = -1
@@ -58,42 +63,49 @@ function draw(){
         }
     }  
 })();
-var foodPos = {x: 10, y: 10, foodWidth: 10, foodHeight: 10};
+var foodPos = {x: 0, y: 0, foodWidth: 10, foodHeight: 10};
 
 var foodInterval = setInterval(createFood, 4000);
 function createFood(){
     var myCanvas = document.querySelector("canvas#myCanvas");
-    var context = myCanvas.getContext("2d");
-    context.clearRect(foodPos.x, foodPos.y, 10, 10); 
-    foodPos.x += Math.floor((Math.random()*100));
-    foodPos.y += Math.floor((Math.random()*100));
+    var contextt = myCanvas.getContext("2d");
+    context.clearRect(foodPos.x, foodPos.y, foodPos.foodWidth, foodPos.foodHeight); 
+    foodPos.x += Math.floor((Math.random()*50))
+    foodPos.y += Math.floor((Math.random()*50))
    
 
-    context.fillStyle =  "red";
-    context.fillRect(foodPos.x,foodPos.y, foodPos.foodWidth, foodPos.foodHeight);
+    contextt.fillStyle =  "red";
+    contextt.fillRect(foodPos.x,foodPos.y, foodPos.foodWidth, foodPos.foodHeight);
+    //eatFood(x, y, foodPos.x, foodPos.y)
 
+    console.log(foodPos.x, foodPos.y)
+    if(foodPos.x +foodPos.foodWidth >590 || foodPos.x < 0){
+        foodPos.x = 0;
+        foodPos.y = 0;
+      
+        
+    }
+    if(foodPos.y +foodPos.foodHeight >590 || foodPos.y <0){
+        foodPos.x = 0;
+        foodPos.y = 0;
+        
+    }
     
-    if(foodPos.x >590 || foodPos.x < 0){
-        foodPos.x = 10
-    
-    }
-    if(foodPos.y >590 || foodPos.y < 0){
-        foodPos.y = 10
-    }
-    eatFood(x, y, foodPos.x, foodPos.y)
-}
+    checkLocation(snakeCordinate.x, snakeCordinate.y, foodPos.x, foodPos.y)
+} */
 
-var i = 10;
-function eatFood(xSnake, ySnake, xFood,yFood ){
+/* function checkLocation(x, y, foodX, foodY){
+   
 
-    if(xSnake+ width == xFood + foodPos.foodWidth && ySnake+ heigt == yFood + foodPos.foodHeight){
-        width +=i
-        heigt = 10;
-        context.fillRect(x, y, width, heigt);
+    if(x+width > foodX+foodPos.foodWidth){
+        console.log("träff")
+        
     }
- 
 
-}
+} */
+
+
+
 
 
 
