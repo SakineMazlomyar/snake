@@ -9,7 +9,22 @@ var snake = [
 var myCanvas = document.getElementById("myCanvas");
 var context = myCanvas.getContext("2d");
 
+
+var dx = 10;
+var dy = 10;
+advanceSnake()
+//360 310
+var dx = 0;
+var dy = -10;
+
+advanceSnake()
 drawSnake();
+function advanceSnake() {
+    var head = {x: snake[0].x + dx, y: snake[0].y + dy};
+    snake.unshift(head);
+    snake.pop();
+    
+}
 
 function drawSnake() {
         // loop through the snake parts drawing each part on the canvas
@@ -21,25 +36,6 @@ context.strokeRect(snakePart.x, snakePart.y, 10, 10);
 }
 
 )};
-moveSnake();
 
-var xSpeed = 10;
-var ySpeed = 10;
-function moveSnake() {
-        // loop through the snake parts drawing each part on the canvas
-snake.forEach(function setInterval(snakeCordinate){
-    snakeCordinate.x += xSpeed
-    snakeCordinate.y += ySpeed
-    
 
-    //eatFood(x, y, foodPos.x, foodPos.y, context)
-/*     if(snakeCordinate.x + width >590 || snakeCordinate.x < 0){
-        clearInterval(snakeInterval)
-        clearInterval(foodInterval)
-    }
-    if(snakeCordinate.y + heigt >590 ||  snakeCordinate.y < 0){
-        clearInterval(snakeInterval)
-        clearInterval(foodInterval)
-    } */
-}
-)}
+
