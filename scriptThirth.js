@@ -13,15 +13,15 @@ var context = myCanvas.getContext("2d");
 var dy = -10;
 moveSnake() */
 //360 310
-var dx = 0;
-var dy = 10;
+var directionX = 0;
+var directionY = 10;
 
 moveSnake()
 
 drawSnake();
 var head
 function moveSnake() {
-    head = {x: snake[0].x + dx, y: snake[0].y + dy};
+    head = {x: snake[0].x + directionX, y: snake[0].y + directionY};
     //We add new head
     snake.unshift(head);
     //We remove the last index so we still have five
@@ -46,14 +46,38 @@ function clearCanvas() {
     context.strokeRect(0, 0, 600, 600);
 }
  
-var intevalMove = setInterval(timerSnake, 1000)
+var intevalMove = setInterval(timerSnake, 300)
 function timerSnake(){
     clearCanvas()
     moveSnake()
     drawSnake()
 
 }
-
-
-
+(function directions(){
+    document.onkeydown = function(key){
+        if (key.keyCode == '38') {
+            directionX= 0
+            directionY = -10;
+        
+            // up arrow
+        }
+        else if (key.keyCode == '40') {
+            directionX = 0
+            directionY = 10;
+            
+            // down arrow
+        }
+        else if (key.keyCode == '37') {
+            directionX = -10
+            directionY= 0;
+           // left arrow
+        }
+        else if (key.keyCode == '39') {
+            directionX = 10
+            directionY = 0;
+          
+           // right arrow
+        }
+    }  
+})();
 
