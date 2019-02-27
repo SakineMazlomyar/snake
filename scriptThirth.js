@@ -1,4 +1,6 @@
-
+function init() {
+    ss()
+}
 var snake = [
     {x: 350, y: 300},
     {x: 340, y: 300},
@@ -25,34 +27,48 @@ function moveSnake() {
     //We add new head
     snake.unshift(head);
     //We remove the last index so we still have five
-    snake.pop();
-    
+    if(snake[0].x == foodX && snake[0].y == foodY) {
+        
+        
+    } else {
+        snake.pop()
+    }
 }
+
+
+    
+
 
 function drawSnake() {
     // loop through the snake parts drawing each part on the canvas
-    snake.forEach(function drawSnakePart(snakePart) {
-        
-        context.fillStyle = "blue";
-        context.fillRect(snakePart.x, snakePart.y, 10, 10);
-        context.strokeRect(snakePart.x, snakePart.y, 10, 10);
-    }
-    
-    )};
+    snake.forEach(drawSnakePart)
+};
+
+function drawSnakePart(snakePart) {
+    context.fillStyle = "blue";
+    context.fillRect(snakePart.x, snakePart.y, 10, 10);
+    context.strokeRect(snakePart.x, snakePart.y, 10, 10);
+}
 function clearCanvas() {
     context.fillStyle = "black";
     
     context.fillRect(0,  0, 600, 600);
     context.strokeRect(0, 0, 600, 600);
 }
- 
-var intevalMove = setInterval(timerSnake, 300)
-function timerSnake(){
-    clearCanvas()
-    moveSnake()
-    drawSnake()
+function ss() {
+    setTimeout(function(){
+        clearCanvas()
+        drawFood()
+        moveSnake()
+        drawSnake()
+        
+        ss()
+    },200);
 
 }
+
+
+
 (function directions(){
     document.onkeydown = function(key){
         if (key.keyCode == '38') {
@@ -80,4 +96,29 @@ function timerSnake(){
         }
     }  
 })();
+
+
+function calculateRandomXandY(minimum, maximum) {
+    return Math.round((Math.random() * (maximum-minimum)-minimum) / 10) * 10;
+
+}
+
+var foodX = calculateRandomXandY(0, 600 - 10);
+var foodY = calculateRandomXandY(0, 600 - 10);
+function createFood() {
+    snake.forEach(function isFoodOnSnake(part) {
+        if(part.x == foodX && part.y == foodY) {
+            createFood()
+    
+        }
+        
+  })
+}
+
+function drawFood() {
+    context.fillStyle = 'green';
+    context.fillRect(foodX, foodY, 10, 10);
+    context.strokeRect(foodX, foodY, 10, 10);
+}
+
 
